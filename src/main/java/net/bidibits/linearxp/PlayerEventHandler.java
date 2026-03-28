@@ -7,11 +7,13 @@ import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
 public class PlayerEventHandler {
+
     @SubscribeEvent
     public void onPlayerTick(net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent event) {
         if (event.entityLiving instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.entityLiving;
             PlayerProperties props = PlayerProperties.get(player);
+
             if (props != null) {
                 int currentLevel = player.experienceLevel;
                 int lastLevel = props.getLastLevel();
@@ -44,7 +46,9 @@ public class PlayerEventHandler {
     @SubscribeEvent
     public void onPlayerClone(PlayerEvent.Clone event) {
         PlayerProperties oldProps = PlayerProperties.get(event.original);
+
         if (oldProps != null) {
+
             PlayerProperties newProps = PlayerProperties.get(event.entityPlayer);
             if (newProps != null) {
                 newProps.setLastLevel(oldProps.getLastLevel());
