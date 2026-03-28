@@ -29,8 +29,7 @@ public class PlayerProperties implements IExtendedEntityProperties {
     }
 
     @Override
-    public void init(Entity entity, World world) {
-    }
+    public void init(Entity entity, World world) {}
 
     public int getLastLevel() {
         return lastLevel;
