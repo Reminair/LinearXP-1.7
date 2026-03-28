@@ -12,46 +12,24 @@ public class PlayerEventHandler {
         if (event.entityLiving instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.entityLiving;
             PlayerProperties props = PlayerProperties.get(player);
-            if (!player.worldObj.isRemote) {
-                if (props != null) {
-                    int currentLevel = player.experienceLevel;
-                    int lastLevel = props.getLastLevel();
-                    int k = LinearXP.xpPerLevel;
+            if (props != null) {
+                int currentLevel = player.experienceLevel;
+                int lastLevel = props.getLastLevel();
+                int k = LinearXP.xpPerLevel;
 
-                    if (currentLevel < lastLevel) {
-                        // spending
-                        player.experienceTotal = currentLevel * k;
-                        player.experience = 0.0F;
-                    } else {
-                        // gaining
-                        int level = player.experienceTotal / k;
-                        float progress = (float) (player.experienceTotal % k) / (float) k;
-                        if (progress < 0.0F || progress > 1.0F) progress = 0.0F;
-                        player.experienceLevel = level;
-                        player.experience = progress;
-                    }
-                    props.setLastLevel(player.experienceLevel);
+                if (currentLevel < lastLevel) {
+                    // spending
+                    player.experienceTotal = currentLevel * k;
+                    player.experience = 0.0F;
+                } else {
+                    // gaining
+                    int level = player.experienceTotal / k;
+                    float progress = (float) (player.experienceTotal % k) / (float) k;
+                    if (progress < 0.0F || progress > 1.0F) progress = 0.0F;
+                    player.experienceLevel = level;
+                    player.experience = progress;
                 }
-            } else {
-                if (props != null) {
-                    int currentLevel = player.experienceLevel;
-                    int lastLevel = props.getLastLevel();
-                    int k = LinearXP.xpPerLevel;
-
-                    if (currentLevel < lastLevel) {
-                        // spending
-                        player.experienceTotal = currentLevel * k;
-                        player.experience = 0.0F;
-                    } else {
-                        // gaining
-                        int level = player.experienceTotal / k;
-                        float progress = (float) (player.experienceTotal % k) / (float) k;
-                        if (progress < 0.0F || progress > 1.0F) progress = 0.0F;
-                        player.experienceLevel = level;
-                        player.experience = progress;
-                    }
-                    props.setLastLevel(player.experienceLevel);
-                }
+                props.setLastLevel(player.experienceLevel);
             }
         }
     }
