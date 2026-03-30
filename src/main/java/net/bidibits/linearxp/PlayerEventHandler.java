@@ -46,13 +46,10 @@ public class PlayerEventHandler {
     @SubscribeEvent
     public void onPlayerClone(PlayerEvent.Clone event) {
         PlayerProperties oldProps = PlayerProperties.get(event.original);
+        PlayerProperties newProps = PlayerProperties.get(event.entityPlayer);
 
-        if (oldProps != null) {
-
-            PlayerProperties newProps = PlayerProperties.get(event.entityPlayer);
-            if (newProps != null) {
-                newProps.setLastLevel(oldProps.getLastLevel());
-            }
+        if (oldProps != null && newProps != null) {
+            newProps.setLastLevel(oldProps.getLastLevel());
         }
     }
 }
